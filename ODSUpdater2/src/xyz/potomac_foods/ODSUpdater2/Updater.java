@@ -1,8 +1,6 @@
 package xyz.potomac_foods.ODSUpdater2;
 
 import java.io.IOException;
-import java.net.URL;
-import java.net.URLConnection;
 
 public class Updater {
 	
