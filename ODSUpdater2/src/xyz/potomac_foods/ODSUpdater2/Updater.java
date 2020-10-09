@@ -10,7 +10,7 @@ public class Updater {
 		Downloader<String> downloader;
 		
 		// Download everything needed
-		if (hasInternetConnection()) {
+		if (Utilities.hasInternetConnection()) {
 			downloader = new Downloader<>("https://www.potomac-foods.xyz/ods2/downloads/");
 			String dataReceived = "";
 			
@@ -40,21 +40,8 @@ public class Updater {
 				System.err.println("There was a fatal error downloading a file! " + e);
 			}
 			
+		} else {
+			System.out.println("No internet connection! Skipping update...");
 		}
-		
 	}
-	
-	public static boolean hasInternetConnection() {
-		try {
-			URL url = new URL("https://www.google.com/"); 
-	        URLConnection connection;
-			connection = url.openConnection();
-			connection.connect(); 
-		} catch (Exception e) {
-			return false;
-		} 
-		
-		return true;
-	}
-	
 }

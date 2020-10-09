@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,6 +26,19 @@ public class Utilities {
 		in.close();
 		
 		return linesOfCode.toString();
+	}
+	
+	public static boolean hasInternetConnection() {
+		try {
+			URL url = new URL("https://www.google.com/"); 
+	        URLConnection connection;
+			connection = url.openConnection();
+			connection.connect(); 
+		} catch (Exception e) {
+			return false;
+		} 
+		
+		return true;
 	}
 	
 	public static byte[] getAsBytes(String webURL) throws IOException {
@@ -53,6 +67,7 @@ public class Utilities {
 		String vOnSys = "";
 		String vOnline = "1";
 		
+		//vX where v is just a letter and X is the version
 		Pattern versionPattern = Pattern.compile("[0-1]+.+.");
 		Matcher versionOnSystemFound = versionPattern.matcher(versionOnSystem);
 		Matcher versionOnlineFound = versionPattern.matcher(versionOnline);
