@@ -5,11 +5,11 @@ import java.io.IOException;
 public class Updater {
 	
 	public static void main(String[] args) {
-		Downloader<String> downloader;
+		Downloader downloader;
 		
 		// Download everything needed
 		if (Utilities.hasInternetConnection()) {
-			downloader = new Downloader<>("https://www.potomac-foods.xyz/ods2/downloads/");
+			downloader = new Downloader("https://www.potomac-foods.xyz/ods2/downloads/");
 			String dataReceived = "";
 			
 			// Add layouts, images, other needed files to download queue

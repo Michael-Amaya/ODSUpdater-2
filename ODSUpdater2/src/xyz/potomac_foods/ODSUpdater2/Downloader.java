@@ -7,18 +7,23 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-public class Downloader<E> {
+/** Allows you to stage items for download, then download them all at once
+ * 
+ * @author Michael Amaya
+ *
+ */
+public class Downloader{
 	
-	ArrayList<E> elements;
+	ArrayList<String> toDownload;
 	String downloadLocation;
 	
 	public Downloader(String downloadLocation) {
-		elements = new ArrayList<>();
+		toDownload = new ArrayList<>();
 		this.downloadLocation = downloadLocation.substring(0, downloadLocation.length() - 1);
 	}
 	
-	public boolean add(E element) {
-		elements.add(element);
+	public boolean add(String element) {
+		toDownload.add(element);
 		return true;
 	}
 	
@@ -26,7 +31,7 @@ public class Downloader<E> {
 		ArrayList<String> foldersToBeMade = new ArrayList<>();
 		
 		// Check for folders that need to be made
-		for (E element : elements) {
+		for (String element : toDownload) {
 			String[] newElement = ((String) element).split("/");
 			newElement[newElement.length - 1] = "";
 			foldersToBeMade.add(String.join("/", newElement));
@@ -43,7 +48,7 @@ public class Downloader<E> {
 		}
 		
 		// Download crap to the correct folders
-		for (E element : elements) {
+		for (String element : toDownload) {
 			String newElement = (String) element;
 			String oldElement = (String) element;
 			newElement = newElement.substring(1, newElement.length());
@@ -59,15 +64,15 @@ public class Downloader<E> {
 		return true;
 	}
 	
-	public ArrayList<E> getElements() {
-		return elements;
+	public ArrayList<String> getElements() {
+		return toDownload;
 	}
 	
 	public String toString() {
 		StringBuilder items = new StringBuilder();
 		
 		items.append(" {Downloader} ");
-		for (E item : elements) {
+		for (String item : toDownload) {
 			items.append(item).append(", ");
 		}
 		
